@@ -62,5 +62,9 @@ npm run nodemon
 - **Why use it?**: MongoDB is a NoSQL database that offers flexibility and scalability, especially suited for cloud-based apps with dynamic, unstructured data.
 - **Why special?**: It stores data in JSON-like documents, making it perfect for handling large amounts of flexible data and quickly evolving applications.
 
+### 10. Simple-Peer
+- **Why use it?**: Simple-peer is a simple WebRTC library that facilitates peer-to-peer data, audio, and video streams between users. It's perfect for building real-time video chat or file-sharing applications.
+- **Why special?**: Simple-peer abstracts away the complexity of WebRTC, allowing you to quickly implement real-time peer-to-peer communication with minimal setup, making it a great choice for developers who need a lightweight yet powerful solution.
+
 ## Conclusion
 This project is designed to offer a real-time, scalable web application with powerful user interfaces, authentication, and media handling. Each library brings unique capabilities that make the app more robust, secure, and fast.
