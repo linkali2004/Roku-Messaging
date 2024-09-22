@@ -3,10 +3,10 @@ import next from "next";
 import { Server } from "socket.io";
 
 const dev = process.env.NODE_ENV !== "production";
-const hostname = "localhost";
+const hostname = "0.0.0.0";  
 const port = process.env.PORT || 3000;
 
-const app = next({ dev, hostname, port });
+const app = next({ dev, port });
 const handler = app.getRequestHandler();
 
 app.prepare().then(() => {
@@ -14,7 +14,7 @@ app.prepare().then(() => {
 
   const io = new Server(httpServer, {
     cors: {
-      origin: "*",
+      origin: process.env.CORS_ORIGIN || "*",  
       methods: ["GET", "POST"],
     },
   });
@@ -38,7 +38,7 @@ app.prepare().then(() => {
             socketId: socket.id,
             username: user.username,
           });
-          console.log(onlineUsers);
+          if (dev) console.log(onlineUsers);  
         }
       }
       io.emit("getUsers", onlineUsers);
@@ -59,7 +59,6 @@ app.prepare().then(() => {
         }
       }
     });
-
 
     socket.on("endcall", (ongoingCall) => {
       if (ongoingCall?.participants?.caller) {
