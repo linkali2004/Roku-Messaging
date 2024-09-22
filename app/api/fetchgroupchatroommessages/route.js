@@ -4,10 +4,11 @@ import { StoredChats } from "@/models/StoredChats";
 import mongoose from "mongoose";
 import { connect } from "@/dbConfig/dbconfig";
 
-connect();
+
 
 export async function POST(request)
 {
+  await connect();
     const reqBody = await request.json();
     const response = await StoredChats.find({
         participants: { 

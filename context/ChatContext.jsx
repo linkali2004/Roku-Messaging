@@ -92,7 +92,7 @@ export default function ChatContextProvider({children})
       }
     
     return (
-        <ChatContext.Provider value={{storeMessageInLocalStorage,addedUsers,setAddedUsers,chatUsers,searchQuery,setSearchQuery,favourite,setFavourite,Public,setChatUsers,setPublic,currentChat,setCurrentChat}}>
+        <ChatContext.Provider value={{storeMessageInLocalStorage,persistMessagesToDatabaseForSingleChat,persistMessagesToDatabaseForGroupChat,addedUsers,setAddedUsers,chatUsers,searchQuery,setSearchQuery,favourite,setFavourite,Public,setChatUsers,setPublic,currentChat,setCurrentChat}}>
             {children}
         </ChatContext.Provider>
     )

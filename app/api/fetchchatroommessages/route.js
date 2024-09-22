@@ -4,10 +4,11 @@ import { StoredChats } from "@/models/StoredChats";
 import mongoose from "mongoose";
 import { connect } from "@/dbConfig/dbconfig";
 
-connect();
+
 
 export async function POST(request)
 {
+  await connect();
     const reqBody = await request.json();
     const {receiver,sender} = reqBody;
     const response = await StoredChats.find({

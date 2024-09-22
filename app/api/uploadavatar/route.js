@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import jwt from "jsonwebtoken";
 import User from '@/models/UserModel';
 import mongoose from 'mongoose';
-connect();
+
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -14,6 +14,7 @@ cloudinary.config({
 });
 
 export async function POST(request) {
+  await connect();
     const { file } = await request.json();
 
     try {

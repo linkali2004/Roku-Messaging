@@ -5,9 +5,10 @@ import mongoose from "mongoose";
 import { StoredChats } from "@/models/StoredChats";
 import { connect } from "@/dbConfig/dbconfig";
 
-connect();
+
 
 export async function POST(request) {
+  await connect();
   const reqBody = await request.json();
   const {messages,secondUser} = reqBody;
   const cookieStore = cookies();

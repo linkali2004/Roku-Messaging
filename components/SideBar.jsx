@@ -3,9 +3,10 @@ import { Avatar, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import SidebarNav from './SidebarNav';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { usePathname } from 'next/navigation';
 export default function SideBar() {
   const [name, setName] = useState("");
-
+  const pathname = usePathname();
   useEffect(() => {
     async function fetchName() {
       try {
@@ -21,7 +22,10 @@ export default function SideBar() {
       }
     }
 
-    fetchName();
+    if(pathname != "/credentials")
+    {
+      fetchName();
+    }
   }, []);
 
   async function handleLogout() {

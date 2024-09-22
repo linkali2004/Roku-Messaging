@@ -3,9 +3,10 @@ import { StoredChats } from "@/models/StoredChats";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-connect();
+
 
 export async function POST(request) {
+  await connect();
   try {
     const reqBody = await request.json();
     const userId = reqBody;

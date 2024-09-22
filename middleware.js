@@ -4,13 +4,13 @@ export function middleware(request)
 {
     const path = request.nextUrl.pathname;
 
-    const isPublicPath = path === "/credentials" || path === "/verifyemail";
+    const isPublicPath = path === "/credentials";
 
     const cookie = request.cookies.get("tokenJWT")?.value || '';
 
     if(cookie && isPublicPath)
     {
-        return NextResponse.redirect("/");
+        return NextResponse.redirect("http://localhost:3000/");
     }
 
     if(!isPublicPath && !cookie)

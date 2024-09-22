@@ -1,21 +1,32 @@
-import mongoose, { connections } from "mongoose";
+import mongoose from "mongoose";
 
-export async function connect()
-{
-    try
-    {
-        mongoose.connect(process.env.MONGO_URI || '').then(()=>{
-            console.log("connected to mongodb");
-        },
-        err => {
-            console.log("Cannot connect to database" + err);
-        } 
-    );
-        const connection = mongoose.connection;
+const connection = {};
 
-        
-    }catch(e)
-    {
-        console.log("The process cannot proceed due to following error: " + e);
+export async function connect() {
+  if (connection.isConnected) {
+    console.log("Already connected to the database");
+    return;
+  }
+
+  if (mongoose.connections.length > 0) {
+    connection.isConnected = mongoose.connections[0].readyState;
+    if (connection.isConnected === 1) {
+      console.log("Using existing database connection");
+      return;
     }
+    await mongoose.disconnect(); 
+  }
+
+  try {
+    const db = await mongoose.connect(process.env.MONGO_URI || "", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    connection.isConnected = db.connections[0].readyState;
+    console.log("Connected to MongoDB");
+  } catch (e) {
+    console.error("Failed to connect to MongoDB", e);
+    throw new Error("Failed to connect to MongoDB");
+  }
 }

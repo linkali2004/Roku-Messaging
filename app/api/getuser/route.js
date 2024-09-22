@@ -6,10 +6,11 @@ import { connect } from "@/dbConfig/dbconfig";
 import mongoose from "mongoose";
 import bcryptjs from "bcryptjs";
 
-connect();
 
 export async function GET()
 {
+    await connect();
+
     const cookieStore = cookies();
     const encodedToken = cookieStore.get("tokenJWT")?.value;
 
@@ -23,6 +24,8 @@ export async function GET()
 
 export async function POST(request)
 {
+    await connect();
+
     const reqBody = await request.json();
     const {username,email,password,avatar,id} = reqBody;
     try

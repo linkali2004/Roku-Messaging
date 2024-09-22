@@ -3,6 +3,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import { RegistrationContext } from "./RegistrationContext";
+import { usePathname } from "next/navigation";
 
 export const SocketContext = createContext();
 
@@ -12,6 +13,7 @@ export default function SocketContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const pathname= usePathname();
 
   useEffect(() => {
     const newSocket = io(); 
@@ -29,7 +31,10 @@ export default function SocketContextProvider({ children }) {
       setUser(data);
     }
 
-      fetchUserDetails();
+      if(pathname != "/credentials")
+      {
+        fetchUserDetails();
+      }
   }, [socket]);
 
   useEffect(() => {
@@ -69,11 +74,3 @@ export default function SocketContextProvider({ children }) {
     </SocketContext.Provider>
   );
 }
-
-export const useSocket = () => {
-  const context = useContext(SocketContext);
-  if (!context) {
-    throw new Error("useSocket must be used within a SocketContextProvider");
-  }
-  return context;
-};

@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 import { SocketContext } from "./SocketContext";
 import { RegistrationContext } from "./RegistrationContext";
 import Peer from "simple-peer";
+import { OverallContext } from "./OverallContext";
 
 export const CallContext = createContext();
 
@@ -14,6 +15,7 @@ export default function CallContextProvider({ children }) {
     const [localstream, setLocalStream] = useState();
     const [peer, setPeer] = useState(null);
     const [remoteStream, setRemoteStream] = useState(null);
+    const {setSnackbarMsg,setSnackOpen} = useContext(OverallContext);
 
     const getMediaStream = useCallback(async (facemode) => {
         if (localstream) {
@@ -120,20 +122,30 @@ export default function CallContextProvider({ children }) {
         if (!socket || !currentSocketUser) return;
 
         const callingUser = onlineUsers?.find(ele => ele.id === user);
-        const participants = { caller: currentSocketUser.socketId, receiver: callingUser.socketId };
-        const stream = await getMediaStream();
-
-        if (!stream) {
+        if(callingUser)
+        {
+            const participants = { caller: currentSocketUser.socketId, receiver: callingUser.socketId };
+            const stream = await getMediaStream();
+    
+            if (!stream) {
+                return;
+            }
+    
+            setOngoingCall({
+                participants,
+                isRinging: false,
+                caller
+            });
+    
+            socket.emit("call", { participants, caller });
+            setSnackbarMsg("Call Placed");
+            setSnackOpen(true);
+        }
+        else{
+            setSnackbarMsg("Couldn't place call as user not online");
+            setSnackOpen(true);
             return;
         }
-
-        setOngoingCall({
-            participants,
-            isRinging: false,
-            caller
-        });
-
-        socket.emit("call", { participants, caller });
     }, [socket, currentSocketUser, onlineUsers, getMediaStream]);
 
     const hangupCall = useCallback(() => {

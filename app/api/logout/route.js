@@ -1,7 +1,6 @@
 import { connect } from "@/dbConfig/dbconfig";
 import {NextResponse} from "next/server";
 
-connect();
 
 
 export async function GET(request)
