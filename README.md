@@ -1,3 +1,9 @@
+# Created By
+Name-Shrey Varad Dwivedi
+University- IIT ISM Dhanbad
+Department - Mechanical Engineering
+
+
 
 # Overview
 This is a **Next.js** project that can be run locally by following the instructions below. The project uses several key libraries and technologies, making it efficient, secure, and scalable for real-time, responsive, and full-stack web applications.
