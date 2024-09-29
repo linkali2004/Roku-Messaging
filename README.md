@@ -1,9 +1,3 @@
-# Created By
-Name-Shrey Varad Dwivedi
-University- IIT ISM Dhanbad
-Department - Mechanical Engineering
-
-
 
 # Overview
 This is a **Next.js** project that can be run locally by following the instructions below. The project uses several key libraries and technologies, making it efficient, secure, and scalable for real-time, responsive, and full-stack web applications.
@@ -23,6 +17,55 @@ cd project-directory
 ### Install dependencies:
 ```bash
 npm install
+```
+
+## Environment Variables
+
+To run this project, you will need to set up the following environment variables in a `.env` file:
+
+```plaintext
+MONGO_URI=mongodb+srv://<your_username>:<your_password>@cluster0.9j4ff.mongodb.net/<your_database>?retryWrites=true&w=majority&appName=Cluster0
+PORT=3000
+DOMAIN=localhost:3000/
+TOKENSECRET="your_token_secret"
+
+CLOUD_NAME=your_cloud_name
+CLOUDINARY_KEY=your_cloudinary_key
+CLOUDINARY_SECRET=your_cloudinary_secret
+CLOUDINARY_URL=cloudinary://your_cloudinary_key:your_cloudinary_secret@your_cloud_name
+
+NODE_ENV="development"
+```
+
+## How to get some of the env variables
+```plaintext
+MongoDB Atlas:
+
+To get the MONGO_URI, first, sign up for a free MongoDB Atlas account.
+After signing in, create a new project and cluster in the Atlas dashboard.
+Once your cluster is created, navigate to the "Database Access" section to create a database user and password.
+In the "Network Access" section, whitelist your IP or set it to allow access from anywhere.
+Go to the "Clusters" section, click on "Connect", and choose "Connect Your Application". You will be provided with a MongoDB URI, where you should replace the placeholders <your_username>, <your_password>, and <your_database> with your actual user credentials and database name.
+```
+
+```plaintext
+Cloudinary:
+
+To get the CLOUD_NAME, CLOUDINARY_KEY, CLOUDINARY_SECRET, and CLOUDINARY_URL, sign up for a free Cloudinary account.
+Once you’re logged in, go to your Cloudinary dashboard.
+In the dashboard, you will find your Cloudinary API credentials, including the CLOUD_NAME, API Key, and API Secret. Use these values to populate the corresponding environment variables.
+The CLOUDINARY_URL will also be available in the dashboard and should follow the format: cloudinary://<API_KEY>:<API_SECRET>@<CLOUD_NAME>. Replace the placeholders with your actual credentials.
+```
+
+```plaintext
+JWT Secret:
+
+The TOKENSECRET is a secret key used to sign and verify JSON Web Tokens (JWTs). You can generate this manually by choosing a random, strong secret (such as a combination of random letters and numbers), or use an online service like randomkeygen to generate a secure token. This is used for secure authentication and authorization in your app.
+```
+```plaintext
+Node Environment:
+
+The NODE_ENV variable is set to "development" during local development. In production, this should be changed to "production" to optimize performance.
 ```
 
 ### Start the development server using Nodemon:
@@ -71,6 +114,7 @@ npm run nodemon
 ### 10. Simple-Peer
 - **Why use it?**: Simple-peer is a simple WebRTC library that facilitates peer-to-peer data, audio, and video streams between users. It's perfect for building real-time video chat or file-sharing applications.
 - **Why special?**: Simple-peer abstracts away the complexity of WebRTC, allowing you to quickly implement real-time peer-to-peer communication with minimal setup, making it a great choice for developers who need a lightweight yet powerful solution.
+
 
 ## Conclusion
 This project is designed to offer a real-time, scalable web application with powerful user interfaces, authentication, and media handling. Each library brings unique capabilities that make the app more robust, secure, and fast.
